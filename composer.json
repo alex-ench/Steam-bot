@@ -1,0 +1,10 @@
+{
+  "require": {
+    "guzzlehttp/guzzle": "^7.2",
+    "react/event-loop": "1.1.1",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-simplexml": "*",
+    "ext-mbstring": "*"
+  }
+}
