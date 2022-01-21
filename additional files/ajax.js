@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#options').submit(function (event) {
         event.preventDefault();
         let infinitelyStop = 0;
-        let value = $('#start-randomize option:selected').val();
+        let value = $('select#start-randomize option:selected').val();
 
         function random() {
             $.ajax({
@@ -49,10 +49,10 @@ $(document).ready(function () {
             }
         }
 
-        if (value === 'once') {
+        if (value == 'once') {
             random();
         }
-        if (value === 'infinitely') {
+        if (value == 'infinitely') {
             $('#stop-infinitely').show(500);
             infinitely();
         }

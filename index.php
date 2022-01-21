@@ -1,6 +1,3 @@
-<?php
-require 'additional files/steamauth/steamauth.php';
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,6 +14,7 @@ require 'additional files/steamauth/steamauth.php';
 <body>
 <div class="big-box"><span class="welcome">Welcome!<br>Steam Random - completely randomizes your Steam profile.</span>
     <?php
+    require 'additional files/steamauth/steamauth.php';
     if (!isset($_SESSION['steamid'])) {
         echo "<span class='box'><div style='margin: 0 auto; text-align: center;'>Welcome. Please log in!<br><br>";
         loginbutton(4);
@@ -34,16 +32,16 @@ require 'additional files/steamauth/steamauth.php';
                         </div>
                     </div>
                     <div class='container'>
-                        <div class='start-finish-section'>To receive cookies, you need to follow the link, press
-                            \"F12\", open the \"Network\" tab in the inspector. If it is empty, then refresh the page.
-                            Click on \"dologin/\". All you have to do is go to the Request Headers tab and right click
-                            on Cookie to copy the cookie. After that, you need to insert the cookies into the input
-                            field and click \"OK\". You are wonderful!
+                        <div class='start-finish-section'>To receive cookies, you need to follow the link, press "F12",
+                            open the "Network" tab in the inspector. If it is empty, then refresh the page. Click on
+                            "dologin". All you have to do is go to the Request Headers tab and right click on Cookie to
+                            copy the cookie. After that, you need to insert the cookies into the input field and click
+                            "OK". You are wonderful!
                         </div>
                     </div>
                     <div class='container'>
                         <form name='set-cookies' action='' method='post' id='set-cookies' style='display: flex; flex-direction: column; align-items: center;'>
-                            <textarea class='set-cookie' name='set-cookie' id='set-cookie' placeholder='Set your cookies'></textarea>
+                            <label for='set-cookie'></label><textarea class='set-cookie' name='set-cookie' id='set-cookie' placeholder='Set your cookies'></textarea>
                             <p>
                                 <input class='send-cookies' style='cursor:pointer; display: inline;' type='submit' value='Send Cookies!'/>
                             </p>
@@ -70,14 +68,15 @@ require 'additional files/steamauth/steamauth.php';
                                 <div class='start-finish-section' style='width: 100%'>Get api key in
                                     <a href='https://steamcommunity.com/dev/apikey' target='_blank'>Steam site</a>
                                 </div>
-                                <input type='text' class='api-input' name='api-input' id='api-input' placeholder='Type api key'/>
+                                <label for='api-input'>API</label><input type='text' class='api-input' name='api-input' id='api-input' placeholder='Type api key'/>
                             </div>
                             <div class='container' style='display: flex;flex-direction: column; align-items: center;'>
                                 <div class='start-finish-section' style='width: 100%'>Get access token in
                                     <a href='https://store.steampowered.com/points/shop/' target='_blank'>Steam site</a>
                                     and run script in console: <br><span class='item-output'>javascript:JSON.parse(application_config.dataset.loyaltystore).webapi_token;</span>
                                 </div>
-                                <input type='text' class='access-input' name='access-input' id='access-input' placeholder='Type access token'/>
+                                <label for='access-input'>Access
+                                    token</label><input type='text' class='access-input' name='access-input' id='access-input' placeholder='Type access token'/>
                             </div>
                             <p>
                                 <input class='send-api-token' style='cursor:pointer; display: inline;' type='submit' value='Send stuff!'/>
@@ -91,7 +90,7 @@ require 'additional files/steamauth/steamauth.php';
         }
     }
     if (isset($_SESSION['cookies']) and isset($_SESSION['steam_apikey']) and isset($_SESSION['steam_accesstoken'])) {
-    include 'additional files/steamauth/userInfo.php';
+    require 'additional files/steamauth/userInfo.php';
     ?>
     <span class="refresh-profile-data" id="refresh-profile-data"><img src="additional files/reload.svg" style="width: 50px; cursor: pointer;" alt="refresh-profile-data"><span>Refresh profile data</span></span>
     <div class="box" id="profile-info">
@@ -126,7 +125,7 @@ require 'additional files/steamauth/steamauth.php';
             </div>
             <div class="profile-info">
                 <span class="profile-info-name">Avatar: </span>
-                <span class="profile-item"><img id="avatar-image-medium" src='<?= $_SESSION['steam_avatarmedium'] ?>'></span>
+                <span class="profile-item"><img id="avatar-image-medium" src='<?= $_SESSION['steam_avatarmedium'] ?>' alt="avatar-iamge-medium"></span>
             </div>
             <div class="profile-info">
                 <span class="profile-info-name">URL: </span>
@@ -156,26 +155,27 @@ require 'additional files/steamauth/steamauth.php';
                 <div class="options-container">
                     <div id="profile-options">
                         <span class="container" id="parse-customization-options">
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="current" value="current"/>Current customization</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="games-with-achievements" value="games-with-achievements"/>Games with achievements (only list of games)</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="games-with-inventory" value="games-with-inventory"/>Games with inventory (only list of games)</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="avatars" value="avatars"/>Avatars</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="friends" value="friends"/>Friends</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="games" value="games"/>Games</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="inventory" value="inventory"/>Inventory</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="themes" value="themes"/>Themes</label></span>
-                        </span> <span class="container" id="parse-customization-options">
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="achievements" value="achievements"/>Achievements</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="artworks" value="artworks"/>Artworks</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="badges" value="badges"/>Badges</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="completionist" value="completionist"/>Completionist</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="groups" value="groups"/>Groups</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="guides" value="guides"/>Guides</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="profile-items" value="profile-items"/>Profile items</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="reviews" value="reviews"/>Reviews</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="screenshots" value="screenshots"/>Screenshots</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="videos" value="videos"/>Videos</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="workshop" value="workshop"/>Workshop</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="current" value="current"/>Current customization</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="games-with-achievements" value="games-with-achievements"/>Games with achievements (only list of games)</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="games-with-inventory" value="games-with-inventory"/>Games with inventory (only list of games)</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="avatars" value="avatars"/>Avatars</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="friends" value="friends"/>Friends</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="games" value="games"/>Games</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="inventory" value="inventory"/>Inventory</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="themes" value="themes"/>Themes</label></span>
+                        </span>
+                        <span class="container" id="parse-customization-options">
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="achievements" value="achievements"/>Achievements</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="artworks" value="artworks"/>Artworks</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="badges" value="badges"/>Badges</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="completionist" value="completionist"/>Completionist</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="groups" value="groups"/>Groups</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="guides" value="guides"/>Guides</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="profile-items" value="profile-items"/>Profile items</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="reviews" value="reviews"/>Reviews</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="screenshots" value="screenshots"/>Screenshots</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="videos" value="videos"/>Videos</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="parse-customization-checkbox put-checkbox" name="parse-customization[]" id="workshop" value="workshop"/>Workshop</label></span>
                         </span>
                     </div>
                     <div class="container" id="start-randomize">
@@ -196,41 +196,41 @@ require 'additional files/steamauth/steamauth.php';
                 <div class="options-container">
                     <div id="profile-options">
                         <span class="container" id="profile-options">
-                        <h4 style="margin-bottom: 3px; float:left;">Profile options</h4>
-                        <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="main-info" value="main-info"/>Main info</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="showcases" value="showcases"/>Showcases</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="avatar" value="avatar"/>Avatar</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="background" value="background"/>Background</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="favorite-badge" value="favorite-badge"/>Favorite Badge</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="theme" value="theme"/>Theme</label></span>
-                        <span class="button-check-options"><input type="button" class="profile-check-all" id="btn-on" value="Check all"></span>
+                            <h4 style="margin-bottom: 3px; float:left;">Profile options</h4>
+                            <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="main-info" value="main-info"/>Main info</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="showcases" value="showcases"/>Showcases</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="avatar" value="avatar"/>Avatar</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="background" value="background"/>Background</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="favorite-badge" value="favorite-badge"/>Favorite Badge</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="profile-checkbox put-checkbox" name="profile-option[]" id="theme" value="theme"/>Theme</label></span>
+                            <span class="button-check-options"><input type="button" class="profile-check-all" id="btn-on" value="Check all"></span>
                         </span> <span class="container" id="main-info-options" style="display: none">
-                        <h4 style="margin-bottom: 3px; float:left;">Main info options</h4>
-                        <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="nickname" value="nickname"/>Nickname</label></span>
-                        <span class="options-container"><input type="text" class="nickname-input" name="nickname-input" id="nickname-input" placeholder="Type nickname"/></span>
-                        <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="real-name" value="real-name"/>Real name</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="location" value="location"/>Location</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="summary" value="summary"/>Summary</label></span>
-                        <span class="button-check-options"><input type="button" class="main-info-check-all" id="btn-on" value="Check all"></span>
+                            <h4 style="margin-bottom: 3px; float:left;">Main info options</h4>
+                            <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="nickname" value="nickname"/>Nickname</label></span>
+                            <span class="options-container"><input type="text" class="nickname-input" name="nickname-input" id="nickname-input" placeholder="Type nickname"/></span>
+                            <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="real-name" value="real-name"/>Real name</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="location" value="location"/>Location</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="main-info-checkbox put-checkbox" name="main-info-option[]" id="summary" value="summary"/>Summary</label></span>
+                            <span class="button-check-options"><input type="button" class="main-info-check-all" id="btn-on" value="Check all"></span>
                         </span> <span class="container" id="showcases-options" style="display: none">
-                        <h4 style="margin-bottom: 3px; float:left;">Showcases options</h4>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="achievements" value="achievements"/>Achievements</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="artworks-created" value="artworks-created"/>Created artworks</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="artwork-featured" value="artwork-featured"/>Featured artwork</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="badge-collector" value="badge-collector"/>Badge collector</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="completionist" value="completionist"/>Completionist</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="custom-info-box" value="custom-info-box"/>Custom info box</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="favorite-group" value="favorite-group"/>Favorite group</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="game-collector" value="game-collector"/>Game collector</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="game-favorite" value="game-favorite"/>Favorite game</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="guides-created" value="guides-created"/>Created guides</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="guide-favorite" value="guide-favorite"/>Favorite guide</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="items" value="items"/>Items</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="items-for-trade" value="items-for-trade"/>Items for trade</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="screenshots" value="screenshots"/>Screenshots</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="videos" value="videos"/>Videos</label></span>
-                        <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="random-showcases-position" id="random-showcases-position" value="random-showcases-position"/>Random showcases position</label></span>
-                        <span class="button-check-options"><input type="button" class="showcases-check-all" id="btn-on" value="Check all"></span>
+                            <h4 style="margin-bottom: 3px; float:left;">Showcases options</h4>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="achievements" value="achievements"/>Achievements</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="artworks-created" value="artworks-created"/>Created artworks</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="artwork-featured" value="artwork-featured"/>Featured artwork</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="badge-collector" value="badge-collector"/>Badge collector</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="completionist" value="completionist"/>Completionist</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="custom-info-box" value="custom-info-box"/>Custom info box</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="favorite-group" value="favorite-group"/>Favorite group</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="game-collector" value="game-collector"/>Game collector</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="game-favorite" value="game-favorite"/>Favorite game</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="guides-created" value="guides-created"/>Created guides</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="guide-favorite" value="guide-favorite"/>Favorite guide</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="items" value="items"/>Items</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="items-for-trade" value="items-for-trade"/>Items for trade</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="screenshots" value="screenshots"/>Screenshots</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="showcases-option[]" id="videos" value="videos"/>Videos</label></span>
+                            <span class="options-container"><label><input type="checkbox" class="showcases-checkbox put-checkbox" name="random-showcases-position" id="random-showcases-position" value="random-showcases-position"/>Random showcases position</label></span>
+                            <span class="button-check-options"><input type="button" class="showcases-check-all" id="btn-on" value="Check all"></span>
                         </span>
                     </div>
                     <div class="container" id="start-randomize">

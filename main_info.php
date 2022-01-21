@@ -1,31 +1,35 @@
 <?php
 if (isset($_POST['main-info-option'])) {
+    $path_location = __DIR__ . '\data\unchangeable\location.json';
+    $path_adjectives = __DIR__ . '\data\unchangeable\adjectives.json';
+    $path_not_change_data = __DIR__ . '\data\unchangeable\not_change_data.json';
+    $path_real_name = __DIR__ . '\data\unchangeable\real_name.json';
+
     echo "<div class='box'><div class='container'><span class='start-finish-section'>[MAIN INFO]</span></div><div class='container'><div class='output-container'>" . PHP_EOL;
     if (in_array('location', $_POST['main-info-option'])) {
-        $path_location = __DIR__ . '\data\unchangeable\location.json';
-        if (file_exists($path_location)) $send_location = true; else {
+        if (file_exists($path_location)) $send_location = true;
+        else {
             $send_location = false;
             echo "<div class='output-items'><span class='error'>The required file (location.json) do not exist.</span></div>" . PHP_EOL;
         }
     } else $send_location = false;
     if (in_array('nickname', $_POST['main-info-option'])) {
-        $path_adjectives = __DIR__ . '\data\unchangeable\adjectives.json';
-        if (file_exists($path_adjectives)) $send_nickname = true; else {
+        if (file_exists($path_adjectives)) $send_nickname = true;
+        else {
             $send_nickname = false;
             echo "<div class='output-items'><span class='error'>The required file (adjectives.json) do not exist.</span></div>" . PHP_EOL;
         }
     } else $send_nickname = false;
     if (in_array('real-name', $_POST['main-info-option'])) {
-        $path_not_change_data = __DIR__ . '\data\unchangeable\not_change_data.json';
-        $path_real_name = __DIR__ . '\data\unchangeable\real_name.json';
-        if (file_exists($path_not_change_data) and file_exists($path_real_name)) $send_real_name = true; else {
+        if (file_exists($path_not_change_data) and file_exists($path_real_name)) $send_real_name = true;
+        else {
             $send_real_name = false;
             echo "<div class='output-items'><span class='error'>The required files (not_change_data.json or real_name.json) do not exist.</span></div>" . PHP_EOL;
         }
     } else $send_real_name = false;
     if (in_array('summary', $_POST['main-info-option'])) {
-        $path_not_change_data = __DIR__ . '\data\unchangeable\not_change_data.json';
-        if (file_exists($path_not_change_data)) $send_summary = true; else {
+        if (file_exists($path_not_change_data)) $send_summary = true;
+        else {
             $send_summary = false;
             echo "<div class='output-items'><span class='error'>The required files (not_change_data.json) do not exist.</span></div>" . PHP_EOL;
         }
@@ -109,8 +113,6 @@ if (isset($_POST['main-info-option'])) {
         return $summary;
     }
 
-    //echo "<div class='output-items'><span class='output-info-name'>Option randomization is disabled.</span></div>" . PHP_EOL;
-
     if ($send_nickname) {
         $personaName = Nickname($_POST['nickname-input'], $path_adjectives);
         $_SESSION['steam_personaname'] = $personaName;
@@ -133,5 +135,5 @@ if (isset($_POST['main-info-option'])) {
     echo "</div></div><div class='container'><span class='start-finish-section'>[MAIN INFO]</span></div></div>" . PHP_EOL;
 } else {
     $main_info = false;
-    echo "<div class='box'><div class='output-items'><span class='error'>[MAIN INFO] – All options is disabled.</span></div></div>";
+    echo "<div class='box'><div class='output-items'><span class='error'>[MAIN INFO] <br> All options is disabled.</span></div></div>";
 }

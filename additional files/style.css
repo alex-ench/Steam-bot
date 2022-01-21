@@ -114,8 +114,8 @@ body {
     text-transform: none;
     border: 5px dashed var(--general-color-2);
     border-radius: 15px;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
     transition: background-color 400ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
 }
 
@@ -168,15 +168,13 @@ input#btn-on, input#btn-off {
     padding: 15px;
     font-size: 14px;
     border-radius: 12px;
-    -webkit-transition-duration: 400ms;
     transition-duration: 400ms;
     margin: 0 auto;
     flex-direction: column;
     font-family: "Lucida Console", Monaco, monospace;
     letter-spacing: 0.2px;
-    -webkit-box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
 }
 
 input#profile-check-all {
@@ -188,7 +186,6 @@ input#profile-check-all {
     display: block;
     text-align: center;
     color: var(--error);
-    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
     animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
@@ -207,8 +204,8 @@ input#start-profile-random, input#stop-infinitely, input#start-parse, input.send
     margin: 15px auto;
     font-family: "Lucida Console", Monaco, monospace;
     letter-spacing: 0.2px;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
     transition: background-color 400ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
 }
 
@@ -325,7 +322,7 @@ img {
 
     font-family: "Lucida Console", Monaco, monospace;
     letter-spacing: 0.2px;
-    word-spacing: 0px;
+    word-spacing: 0;
     font-weight: 400;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: normal;
@@ -333,8 +330,8 @@ img {
     text-transform: none;
     border: 5px dashed var(--general-color-2);
     border-radius: 15px;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
 }
 
 .logout {
@@ -361,13 +358,13 @@ img {
     align-items: flex-start;
     font-family: "Lucida Console", Monaco, monospace;
     letter-spacing: 0.2px;
-    word-spacing: 0px;
+    word-spacing: 0;
     font-weight: 400;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
 }
 
 #profile-container, #parse-customization-container {
@@ -384,8 +381,8 @@ img {
     margin: 5px 5px 15px 5px;
     padding: 15px;
     border: 4px dashed var(--general-color-2);
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
     background-color: var(--general-color-3);
     transition: background-color 400ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
 }
@@ -395,8 +392,8 @@ img {
     margin: 10px 0 0 0;
     padding: 15px;
     border: 4px dashed var(--general-color-2);
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 30%);
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 5px 0 #0000004d;
+    text-shadow: 1px 1px 1px #0000004d;
     background-color: var(--general-color-3);
     transition-duration: 400ms;
 }
@@ -563,44 +560,44 @@ img#refresh-profile-data {
 
 @keyframes top-out {
     from {
-        top: 0%;
+        top: 0;
         height: 100%;
     }
     to {
         top: 200%;
-        height: 0%;
+        height: 0;
     }
 }
 
 @keyframes top-in {
     from {
         top: -100%;
-        height: 0%;
+        height: 0;
     }
     to {
-        top: 0%;
+        top: 0;
         height: 100%;
     }
 }
 
 @keyframes bot-out {
     from {
-        left: 0%;
+        left: 0;
         width: 100%;
     }
     to {
         left: 200%;
-        width: 0%;
+        width: 0;
     }
 }
 
 @keyframes bot-in {
     from {
         left: -100%;
-        width: 0%;
+        width: 0;
     }
     to {
-        left: 0%;
+        left: 0;
         width: 100%;
     }
 }
@@ -671,7 +668,6 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 5px 5px 5px -5px rgb(34 60 80 / 20%);
-    -webkit-box-shadow: 5px 5px 5px -5px rgb(34 60 80 / 20%) inset;
+    box-shadow: inset 5px 5px 5px -5px #223c5033;
     background-color: #0f3443;
 }
